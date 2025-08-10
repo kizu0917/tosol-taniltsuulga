@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>3x3 зураг + тексттэй сүлжээ</title>
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+
+      
+    }
+
+    .gallery-item {
+      text-align: center;
+      border: 4px solid black;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      border-color: #75aceb;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .caption {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="oyu-images/bs1.JPG" alt="Зураг 1">
+      <div class="caption">Анх удаа яг өөрийнхөө чадвараа үнэлүүлж авсан шагнал. 
+🏆
+</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/bs2.jpeg" alt="Зураг 2">
+      <div class="caption"> Сургуулийн шигшээ багийн гишүүн.
+✨
+</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/bs3.jpg" alt="Зураг 3">
+      <div class="caption"> Гарааны тоглогч болсон үе.
+⛹️‍♀️
+</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/bs4.jpeg" alt="Зураг 4">
+      <div class="caption">Чөлөөт цаг гарвал тоглодог.🏀 </div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="oyu-images/bs5.jpeg" alt="Зураг 5">
+      <div class="caption"> Бүх л үзэж болох боломжтой тэмцээнүүдийг үздэг.🇲🇳⛹️‍♀️</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/bs6.jpeg" alt="Зураг 6">
+      <div class="caption"> Миний амьдарлын үнэ цэнтэй зүйлсүүдийн нэг.✨✨
+✨
+ </div>
+
+
+    </div>
+    
+  </div>
+
+</body>
+</html>

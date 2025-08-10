@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <title>Намуунзаяа | Creative Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --pink-light: #fff5f7;
+            --pink-medium: #ffc0cb;
+            --pink-dark: #ff8fab;
+            --pink-accent: #fb6f92;
+            --pink-deep: #ff5d8f;
+            --peach: #ffddd2;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--pink-light);
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: #5a4a4a;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+        }
+
+        /* Creative Header */
+        .creative-header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--pink-light), var(--peach));
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .creative-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/light-paper-fibers.png');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .creative-header h1 {
+            font-size: 4.5rem;
+            color: var(--pink-deep);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px rgba(255,255,255,0.8);
+        }
+
+        .creative-header p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+
+        /* Photo Collage */
+        .photo-collage {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 120px);
+            gap: 15px;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .photo-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-item:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+        }
+
+        .photo-item:nth-child(2) {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .photo-item:nth-child(3) {
+            grid-column: 4 / 5;
+            grid-row: 1 / 3;
+        }
+
+        .photo-item:nth-child(4) {
+            grid-column: 3 / 4;
+            grid-row: 2 / 4;
+        }
+
+        .photo-item:nth-child(5) {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+        }
+
+        .photo-item:nth-child(6) {
+            grid-column: 2 / 3;
+            grid-row: 3 / 4;
+        }
+
+        .photo-item:nth-child(7) {
+            grid-column: 4 / 5;
+            grid-row: 3 / 4;
+        }
+
+        /* Creative Sections */
+        .creative-section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--pink-deep);
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-medium), var(--pink-deep));
+            border-radius: 3px;
+        }
+
+        /* Creative Cards */
+        .creative-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creative-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--pink-medium), var(--pink-deep));
+        }
+
+        .creative-card h3 {
+            font-size: 2.2rem;
+            color: var(--pink-deep);
+            margin-bottom: 20px;
+        }
+
+        .creative-card p {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .skill-badge {
+            background-color: var(--pink-medium);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .skill-badge:hover {
+            background-color: var(--pink-deep);
+            transform: translateY(-3px);
+        }
+
+        
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--pink-deep);
+        }
+
+        
+        .creative-footer {
+            background: linear-gradient(135deg, var(--pink-medium), var(--pink-deep));
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .creative-footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/light-paper-fibers.png');
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+            background: rgba(255,255,255,0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-5px) rotate(5deg);
+        }
+
+        .copyright {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--pink-deep);
+            transition: var(--transition);
+            margin: 5px;
+            border-radius: 50px;
+        }
+
+        .nav a:hover {
+            background-color: var(--pink-deep);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        
+        @media (max-width: 768px) {
+            .creative-header h1 {
+                font-size: 3rem;
+            }
+            
+            .photo-collage {
+                grid-template-rows: repeat(3, 80px);
+                gap: 10px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .creative-card {
+                padding: 30px 20px;
+            }
+            
+            .nav a {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        .projects{
+            justify-content: center;
+            text-align: center;
+        }
+.status{
+    justify-content: center;
+    text-align: center;
+}
+        @media (max-width: 480px) {
+            .photo-collage {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 100px);
+            }
+            
+            .photo-item:nth-child(1) {
+                grid-column: 1 / 3;
+                grid-row: 1 / 2;
+            }
+            
+            .photo-item:nth-child(2) {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+            
+            .photo-item:nth-child(3) {
+                grid-column: 2 / 3;
+                grid-row: 2 / 4;
+            }
+            
+            .photo-item:nth-child(4) {
+                grid-column: 1 / 2;
+                grid-row: 3 / 5;
+            }
+            
+            .photo-item:nth-child(5) {
+                grid-column: 2 / 3;
+                grid-row: 4 / 5;
+            }
+            
+            .photo-item:nth-child(6),
+            .photo-item:nth-child(7) {
+                display: none;
+            }
+            
+            .creative-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .creative-header p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="#about"><i class="fas fa-heart"></i> Миний тухай</a>
+            <a href="#skills"><i class="fas fa-star"></i> Ур чадвар</a>
+            
+            <a href="#gallery"><i class="fas fa-images"></i> Дурсамжтай зурагнууд</a>
+            <a href="#contact"><i class="fas fa-paper-plane"></i> Холбоо барих</a>
+        </nav>
+    </div>
+
+        <header class="creative-header" id="home">
+        <div class="header-content">
+            <h1>Намуунзаяа</h1>
+            <p>Girl's Code хөтөлбөрийн Улаанбаатар хотын Баянзүрх дүүргээс оролцогч</p>
+            
+            <div class="photo-collage">
+                <div class="photo-item">
+                    <img src="a1.jpg" alt="Намуунзаяа 1">
+                </div>
+                <div class="photo-item">
+                    <img src="g1.jpg" alt="Намуунзаяа 2">
+                </div>
+                <div class="photo-item">
+                    <img src="a8.jpg" alt="Намуунзаяа 3">
+                </div>
+                <div class="photo-item">
+                    <img src="a4.jpg" alt="Намуунзаяа 4">
+                </div>
+                <div class="photo-item">
+                    <img src="a5.jpg" alt="Намуунзаяа 5">
+                </div>
+                <div class="photo-item">
+                    <img src="a6.jpg" alt="Намуунзаяа 6">
+                </div>
+                <div class="photo-item">
+                    <img src="a7.jpg" alt="Намуунзаяа 7">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <section class="creative-section" id="about" style="background-color: var(--pink-light);">
+        <h2 class="section-title">Миний тухай</h2>
+        
+        <div class="creative-card">
+            <h3>Сайн байна уу? 😊</h3>
+            <p>Намайг Намуунзаяа гэдэг. Би 16 настай, 11-р ангийн сурагч. Одоогийн байдлаар Girls Code хөтөлбөрийн Баянзүрхийн бүлэгт хамрагдаж байна.</p>
+            <p>Программ хангамжийн инженер болох мөрөөдөлтэй. Технологийн салбарт эмэгтэйчүүд илүү идэвхтэй оролцоход дуртай.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div>
+                    <h4 style="font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--pink-deep); margin-bottom: 15px;">Үндсэн мэдээлэл</h4>
+                    <p><i class="fas fa-birthday-cake" style="color: var(--pink-deep); margin-right: 10px;"></i> 2009 оны 8-р сарын 27</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--pink-deep); margin-right: 10px;"></i> Улаанбаатар хот, Баянзүрх дүүрэг</p>
+                    <p><i class="fas fa-school" style="color: var(--pink-deep); margin-right: 10px;"></i> Улаанбаатар Эмпати сургууль</p>
+                </div>
+                
+                <div>
+                    <h4 style="font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--pink-deep); margin-bottom: 15px;">Хобби</h4>
+                    <p><i class="fas fa-laptop-code" style="color: var(--pink-deep); margin-right: 10px;"></i> код бичих</p>
+                    <p><i class="fas fa-book" style="color: var(--pink-deep); margin-right: 10px;"></i> Ном унших</p>
+                    <p><i class="fas fa-music" style="color: var(--pink-deep); margin-right: 10px;"></i> Дуу сонсох</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <section class="creative-section" id="skills" style="background-color: white;">
+        <h2 class="section-title">Миний ур чадвар</h2>
+        
+        <div class="creative-card">
+            <h3>Техникийн ур чадвар 💻</h3>
+            <p>Програмчлалын хэд хэдэн хэл, технологийн талаар мэдлэгтэй:</p>
+            
+            <div class="skill-badges">
+                <span class="skill-badge">HTML/CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Git</span>
+                <span class="skill-badge">UI/UX Design</span>
+                <span class="skill-badge">Responsive Design</span>
+            </div>
+        </div>
+        
+        <div class="creative-card">
+            <h3>Хувийн чадвар ✨</h3>
+            <p>Амжилтанд хүрэхэд тусалдаг хувийн чадварууд:</p>
+            
+            <div class="skill-badges">
+                <span class="skill-badge">Бүтээлч сэтгэлгээ</span>
+                <span class="skill-badge">Асуудал шийдвэрлэх</span>
+                <span class="skill-badge">Хамтын ажиллагаа</span>
+                <span class="skill-badge">Цэгцтэй байдал</span>
+                <span class="skill-badge">Урам зориг</span>
+                <span class="skill-badge">Хариуцлага</span>
+            </div>
+        </div>
+    </section>
+
+    
+   <div class="projects">
+               <iframe src="Horse racing/main.html" title="Example Iframe" width="1000" height="600"></iframe>
+            <iframe src="Rock paper scicors/main.html" title="Example Iframe" width="1000"  height="600"></iframe>
+   </div>    
+            
+            
+        
+
+
+
+    <section class="creative-section" id="gallery" style="background-color: white;">
+        <h2 class="section-title">Зургийн цомог</h2>
+        
+        <div class="creative-card">
+            <div class="photo-collage" style="max-width: 100%; margin: 0;">
+                <div class="photo-item">
+                    <img src="g2.jpg" alt="Gallery 1">
+                </div>
+                <div class="photo-item">
+                    <img src="g3.jpg" alt="Gallery 2">
+                </div>
+                <div class="photo-item">
+                    <img src="g4.jpg" alt="Gallery 3">
+                </div>
+                <div class="photo-item">
+                    <img src="g5.jpg" alt="Gallery 4">
+                </div>
+                <div class="photo-item">
+                    <img src="g6.jpg" alt="Gallery 5">
+                </div>
+                <div class="photo-item">
+                    <img src="g7.jpg" alt="Gallery 6">
+                </div>
+                <div class="photo-item">
+                    <img src="a1.jpg" alt="Gallery 7">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="status">
+        <img src="status.jpg">
+    </div>
+  
+    <section class="creative-section" id="contact" style="background-color: var(--pink-light);">
+        <h2 class="section-title">Холбоо барих</h2>
+        
+        <div class="creative-card">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                
+                
+                <div>
+                    <h3>Бусад холбоо барих аргууд 📱</h3>
+                    <div style="margin-top: 30px;">
+                        <p style="margin-bottom: 20px; display: flex; align-items: center;">
+                            <i class="fas fa-envelope" style="font-size: 1.5rem; color: var(--pink-deep); margin-right: 15px;"></i>
+                            <span>namuunzaya@example.com</span>
+                        </p>
+                        
+                        <p style="margin-bottom: 20px; display: flex; align-items: center;">
+                            <i class="fas fa-phone" style="font-size: 1.5rem; color: var(--pink-deep); margin-right: 15px;"></i>
+                            <span>+976 94963386</span>
+                        </p>
+                        
+                        <p style="margin-bottom: 20px; display: flex; align-items: center;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: var(--pink-deep); margin-right: 15px;"></i>
+                            <span>Улаанбаатар хот, Баянзүрх дүүрэг</span>
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 50px;">
+                        <h4 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--pink-deep); margin-bottom: 20px;">Намайг дагах</h4>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="https://www.instagram.com/namuunaaa_09/" style="color: var(--pink-deep); font-size: 1.8rem;"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/namuuna.qs" style="color: var(--pink-deep); font-size: 1.8rem;"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="creative-footer">
+        <div class="footer-content">
+            <h2>Намайг уншсанд баярлалаа!</h2>
+            <p style="max-width: 600px; margin: 0 auto; font-family: 'Poppins', sans-serif;">Программ хангамжийн инженер болох мөрөөдлийнхөө төлөө ажиллаж байгаа 16 настай сурагч</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+               
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

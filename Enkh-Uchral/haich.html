@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Rock-Paper-Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .score-board {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .hands {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hand {
+      margin: 0 60px;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      right: 30px;
+      top: 100px;
+    }
+
+    .choices button {
+      font-size: 24px;
+      margin: 10px;
+      padding: 10px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      background: white;
+    }
+
+    .choices button.selected {
+      border-color: green;
+      background-color: #e0ffe0;
+    }
+
+    #result {
+      font-size: 28px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #select-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+
+    #select-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Rock-Paper-Scissors</h1>
+
+  <div class="score-board">
+    🖥️ <span id="computer-score">0</span> : <span id="player-score">0</span> 🙋
+  </div>
+
+  <div class="hands">
+    <div id="computer-hand" class="hand">❓</div>
+    <div id="player-hand" class="hand">❓</div>
+  </div>
+
+  <div class="choices">
+    <button onclick="selectChoice('rock')" id="btn-rock">✊</button>
+    <button onclick="selectChoice('paper')" id="btn-paper">🖐️</button>
+    <button onclick="selectChoice('scissors')" id="btn-scissors">✌️</button>
+    <button id="select-btn" onclick="confirmChoice()">Select</button>
+  </div>
+
+  <h2 id="result">Choose your move and click Select!</h2>
+
+  <div class="buttons">
+    <button onclick="resetRound()">Refresh Round</button>
+    <button onclick="restartGame()">Restart Game</button>
+  </div>
+
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+    let selectedChoice = null;
+
+    function selectChoice(choice) {
+      selectedChoice = choice;
+
+      // Remove previous highlights
+      document.getElementById('btn-rock').classList.remove('selected');
+      document.getElementById('btn-paper').classList.remove('selected');
+      document.getElementById('btn-scissors').classList.remove('selected');
+
+      // Highlight selected
+      document.getElementById('btn-' + choice).classList.add('selected');
+
+      // Show player's hand immediately
+      document.getElementById("player-hand").textContent = getEmoji(choice);
+      document.getElementById("result").textContent = "Click Select to confirm!";
+    }
+
+    function confirmChoice() {
+      if (!selectedChoice) {
+        alert("Please select a move first!");
+        return;
+      }
+
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      document.getElementById("computer-hand").textContent = getEmoji(computerChoice);
+
+      const winner = getWinner(selectedChoice, computerChoice);
+      const resultText = document.getElementById("result");
+
+      if (winner === "player") {
+        playerScore++;
+        resultText.textContent = "You Win!";
+      } else if (winner === "computer") {
+        computerScore++;
+        resultText.textContent = "Computer Wins!";
+      } else {
+        resultText.textContent = "It's a Draw!";
+      }
+
+      updateScore();
+    }
+
+    function getEmoji(choice) {
+      return choice === "rock" ? "✊" :
+             choice === "paper" ? "🖐️" :
+             "✌️";
+    }
+
+    function getWinner(p, c) {
+      if (p === c) return "draw";
+      if (
+        (p === "rock" && c === "scissors") ||
+        (p === "paper" && c === "rock") ||
+        (p === "scissors" && c === "paper")
+      ) return "player";
+      return "computer";
+    }
+
+    function updateScore() {
+      document.getElementById("player-score").textContent = playerScore;
+      document.getElementById("computer-score").textContent = computerScore;
+    }
+
+    function resetRound() {
+      selectedChoice = null;
+      document.getElementById("result").textContent = "Choose your move and click Select!";
+      document.getElementById("player-hand").textContent = "❓";
+      document.getElementById("computer-hand").textContent = "❓";
+      document.getElementById('btn-rock').classList.remove('selected');
+      document.getElementById('btn-paper').classList.remove('selected');
+      document.getElementById('btn-scissors').classList.remove('selected');
+    }
+
+    function restartGame() {
+      playerScore = 0;
+      computerScore = 0;
+      updateScore();
+      resetRound();
+    }
+  </script>
+
+</body>
+</html>

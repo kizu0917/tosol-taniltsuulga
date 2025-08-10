@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>3x3 зураг + тексттэй сүлжээ</title>
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+
+      
+    }
+
+    .gallery-item {
+      text-align: center;
+      border: 4px solid black;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      border-color: #75aceb;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .caption {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="oyu-images/family1.JPG" alt="Зураг 1">
+      <div class=""> Хамт хоол хийх дуртай. 
+
+</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/family2.JPG" alt="Зураг 2">
+      <div class="caption"> Бөөндөө суугаад кино ,нэвтлүүлэг үзэх.
+
+</div>
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/family3.JPG" alt="Зураг 3">
+      <div class="caption"> Гадуур алхах, хөдөө явах.
+        </div>
+
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/bs6.jpeg" alt="Зураг 3">
+      <div class="caption"> 
+        </div>
+
+    </div>
+
+
+
+
+    <div class="gallery-item">
+      <img src="oyu-images/family5.jpeg" alt="Зураг 3">
+      <div class="caption"> 
+        </div>
+
+    </div>
+    <div class="gallery-item">
+      <img src="oyu-images/family4.jpg" alt="Зураг 3">
+      <div class="caption"> Гадуур алхах, хөдөө явах.
+        </div>
+
+    </div>
+    
+    
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<head>
+  <title>Shagai Race Game</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f0f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #333;
+    }
+
+    .shagai-row {
+      font-size: 2.5em;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .button-container {
+      margin: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 16px;
+      background: #f9b042;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #e49723;
+    }
+
+    .track {
+      position: relative;
+      margin: 50px auto;
+      width: 90%;
+      height: 200px;
+    }
+
+    .lane {
+      position: relative;
+      height: 80px;
+      margin-bottom: 20px;
+      background: #fff;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+    }
+
+    .horse {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 80px;
+      transition: transform 0.5s ease-out;
+    }
+
+    .finish-line {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 100%;
+      background: red;
+    }
+
+    #winnerMessage {
+      font-size: 24px;
+      font-weight: bold;
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐎 Shagai Race Game 🐐</h1>
+
+  <div class="shagai-row" id="shagaiFaces">
+    🐎 🐐 🐑 🐪
+  </div>
+
+  <div class="button-container">
+    <button onclick="raceTurn()" id="raceBtn">🎲 Roll & Race!</button>
+    <button onclick="resetGame()">🔁 Reset</button>
+  </div>
+
+  <div class="track">
+    <div class="lane">
+      <img src="race1-removebg-preview.png" class="horse" id="horse1" />
+      <div class="finish-line"></div>
+    </div>
+    <div class="lane">
+      <img src="race1-removebg-preview.png" class="horse" id="horse2" />
+      <div class="finish-line"></div>
+    </div>
+  </div>
+
+  <div id="winnerMessage"></div>
+
+  <script>
+    const shagaiFaces = ["🐎", "🐐", "🐑", "🐪"];
+    const shagaiDisplay = document.getElementById('shagaiFaces');
+
+    const horse1 = document.getElementById('horse1');
+    const horse2 = document.getElementById('horse2');
+    const winnerMessage = document.getElementById('winnerMessage');
+    const raceBtn = document.getElementById('raceBtn');
+
+    let horse1Pos = 0;
+    let horse2Pos = 0;
+    const stepSize = 60;
+    const finishDistance = window.innerWidth * 0.75;
+
+    function raceTurn() {
+      // Roll 4 shagai
+      let rolled = [
+        Math.floor(Math.random() * 4),
+        Math.floor(Math.random() * 4),
+        Math.floor(Math.random() * 4),
+        Math.floor(Math.random() * 4),
+      ];
+
+      // Show emojis
+      shagaiDisplay.innerHTML = rolled.map(index => shagaiFaces[index]).join(' ');
+
+      // Count steps
+      let horse1Steps = rolled.filter(v => v === 0).length;
+      let horse2Steps = rolled.filter(v => v === 1).length;
+
+      // Move horses
+      horse1Pos += horse1Steps * stepSize;
+      horse2Pos += horse2Steps * stepSize;
+
+      horse1.style.transform = `translateX(${horse1Pos}px)`;
+      horse2.style.transform = `translateX(${horse2Pos}px)`;
+
+      // Check winner
+      if (horse1Pos >= finishDistance) {
+        winnerMessage.textContent = "🐎 Horse 1 Wins!";
+        raceBtn.disabled = true;
+      } else if (horse2Pos >= finishDistance) {
+        winnerMessage.textContent = "🐐 Horse 2 Wins!";
+        raceBtn.disabled = true;
+      }
+    }
+
+    function resetGame() {
+      horse1Pos = 0;
+      horse2Pos = 0;
+      horse1.style.transform = `translateX(0px)`;
+      horse2.style.transform = `translateX(0px)`;
+      winnerMessage.textContent = "";
+      raceBtn.disabled = false;
+      shagaiDisplay.innerHTML = "🐎 🐐 🐑 🐪";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎮 Rock-Paper-Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #1976d2;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .button div {
+      padding: 15px 25px;
+      font-size: 32px;
+      background: white;
+      border: 2px solid #1976d2;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .button div:hover {
+      background-color: #bbdefb;
+    }
+
+    #confirmBox {
+      display: none;
+      margin: 20px 0;
+    }
+
+    #confirmBox button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: #42a5f5;
+      color: white;
+    }
+
+    .image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin-top: 30px;
+    }
+
+    .image img {
+      width: 200px;
+      transition: transform 0.3s ease;
+    }
+
+    #result {
+      font-size: 26px;
+      margin-top: 20px;
+      color: #0d47a1;
+      font-weight: bold;
+    }
+
+    #scoreboard {
+      font-size: 20px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    #restart button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .celebrate {
+      font-size: 40px;
+      animation: pop 0.6s ease;
+      margin-top: 10px;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>✊ Rock-Paper-Scissors ✋✌️</h1>
+
+  <div class="button" id="choiceButtons">
+    <div onclick="askBeforePlay('rock')">🪨</div>
+    <div onclick="askBeforePlay('paper')">📄</div>
+    <div onclick="askBeforePlay('scissors')">✂️</div>
+  </div>
+
+  <div id="confirmBox">
+    <div><strong>Are you sure you want to play this round?</strong></div>
+    <button onclick="confirmPlay()">Yes</button>
+    <button onclick="cancelPlay()">No</button>
+  </div>
+
+  <div class="image">
+    <div>
+      <p><strong>Computer</strong></p>
+      <img id="computerHand" src="" style="display:none;">
+    </div>
+    <div style="font-size: 50px;">VS</div>
+    <div>
+      <p><strong>You</strong></p>
+      <img id="yourHand" src="" style="display:none;">
+    </div>
+  </div>
+
+  <div id="result"></div>
+  <div id="celebrationArea"></div>
+
+  <div id="scoreboard">
+    Matches Played: <span id="matchCount">0</span><br>
+    Your Wins: <span id="yourWins">0</span><br>
+    Computer Wins: <span id="computerWins">0</span>
+  </div>
+
+  <div id="restart">
+    <button onclick="resetGame()">Next Round</button>
+  </div>
+
+  <script>
+    let matchCount = 0;
+    let yourWins = 0;
+    let computerWins = 0;
+    let selectedChoice = "";
+
+    const yourHand = document.getElementById("yourHand");
+    const computerHand = document.getElementById("computerHand");
+    const result = document.getElementById("result");
+    const celebration = document.getElementById("celebrationArea");
+    const choiceButtons = document.getElementById("choiceButtons");
+
+    const images = {
+      rock: "rock-removebg-preview (1).png",
+      paper: "paper1-removebg-preview.png",
+      scissors: "scissors-removebg-preview.png"
+    };
+
+    function askBeforePlay(userChoice) {
+      selectedChoice = userChoice;
+      document.getElementById("confirmBox").style.display = "block";
+    }
+
+    function confirmPlay() {
+      document.getElementById("confirmBox").style.display = "none";
+      play(selectedChoice);
+    }
+
+    function cancelPlay() {
+      document.getElementById("confirmBox").style.display = "none";
+      selectedChoice = "";
+    }
+
+    function play(userChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      yourHand.src = images[userChoice];
+      yourHand.style.display = "block";
+      yourHand.style.transform = "scale(1.1)";
+
+      computerHand.src = images[computerChoice];
+      computerHand.style.display = "block";
+      computerHand.style.transform = "scale(1.1)";
+
+      choiceButtons.style.pointerEvents = "none";
+
+      let outcome = "";
+      if (userChoice === computerChoice) {
+        outcome = "🤝 It's a tie!";
+      } else if (
+        (userChoice === "rock" && computerChoice === "scissors") ||
+        (userChoice === "paper" && computerChoice === "rock") ||
+        (userChoice === "scissors" && computerChoice === "paper")
+      ) {
+        yourWins++;
+        outcome = "🎉 You win!";
+        celebration.innerHTML = `<div class="celebrate">🏆👏🎊</div>`;
+      } else {
+        computerWins++;
+        outcome = "💻 Computer wins!";
+        celebration.innerHTML = `<div class="celebrate">😢💔</div>`;
+      }
+
+      matchCount++;
+
+      result.innerHTML = `You chose <b>${userChoice}</b>, Computer chose <b>${computerChoice}</b><br>${outcome}`;
+      document.getElementById("matchCount").textContent = matchCount;
+      document.getElementById("yourWins").textContent = yourWins;
+      document.getElementById("computerWins").textContent = computerWins;
+
+      document.getElementById("restart").style.display = "block";
+    }
+
+    function resetGame() {
+      yourHand.style.display = "none";
+      computerHand.style.display = "none";
+      yourHand.style.transform = "scale(1)";
+      computerHand.style.transform = "scale(1)";
+      result.innerHTML = "";
+      celebration.innerHTML = "";
+      selectedChoice = "";
+      choiceButtons.style.pointerEvents = "auto";
+      document.getElementById("restart").style.display = "none";
+    }
+  </script>
+</body>
+</html>

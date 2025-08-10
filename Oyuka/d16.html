@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rock-Paper-Scissors</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 30px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    
+    .game {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 150px;
+      font-size: 150px;
+      margin-bottom: 40px;
+      position: relative;
+      height: 180px;
+    }
+
+    #playerHand {
+      position: relative;
+      cursor: default;
+      /
+    }
+
+    #computerHand {
+      user-select: none;
+      opacity: 0.7;
+    }
+
+   
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .choices button {
+      font-size: 60px;
+      width: 90px;
+      height: 90px;
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      background-color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .choices button:hover:not(:disabled) {
+      background-color: #e0e0e0;
+    }
+    .choices button:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+
+    
+    #smallPlayerChoice {
+      font-size: 50px;
+      margin-bottom: 20px;
+      height: 60px;
+    }
+
+  
+    #score {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+
+    #resultText {
+      font-size: 28px;
+      margin-bottom: 25px;
+      min-height: 36px;
+      color: #333;
+    }
+
+  
+    #resetBtn {
+      padding: 12px 25px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #resetBtn:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Хайч - Чулуу - Даавуу</h1>
+
+  <div id="score">Та: 0 | Компьютер: 0</div>
+
+  <div class="game">
+    <div id="playerHand" title="Тоглогч">❓</div>
+    <div id="computerHand" title="Компьютер">❓</div>
+  </div>
+  
+  <div id="smallPlayerChoice"></div>
+
+  <div class="choices">
+    <button onclick="play('rock')" id="btn-rock" title="Чулуу">✊</button>
+    <button onclick="play('paper')" id="btn-paper" title="Даавуу">✋</button>
+    <button onclick="play('scissors')" id="btn-scissors" title="Хайч">✌️</button>
+  </div>
+
+  <div id="resultText">Сонголтоо хийнэ үү?</div>
+
+  <button id="resetBtn" onclick="resetGame()">Дахин эхлүүлэх</button>
+
+  <script>
+    const choices = ['rock', 'paper', 'scissors'];
+    const emojis = { rock: "✊", paper: "✋", scissors: "✌️" };
+
+    let playerScore = 0;
+    let computerScore = 0;
+    let playerHand = document.getElementById("playerHand");
+    let computerHand = document.getElementById("computerHand");
+    let scoreDisplay = document.getElementById("score");
+    let resultText = document.getElementById("resultText");
+    let smallPlayerChoice = document.getElementById("smallPlayerChoice");
+    
+
+    function play(playerChoice) {
+      if (playerScore >= 3 || computerScore >= 3) return; 
+      
+
+  
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      
+      playerHand.textContent = emojis[playerChoice];
+      computerHand.textContent = emojis[computerChoice];
+
+      smallPlayerChoice.textContent = emojis[playerChoice];
+
+      if (playerChoice === computerChoice) {
+        resultText.textContent = "Тэнцлээ!";
+      } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+      ) {
+        resultText.textContent = "Та хожлоо!";
+        playerScore++;
+      
+        
+      } else {
+        resultText.textContent = "Компьютер хожлоо!";
+        computerScore++;
+      }
+
+    
+      scoreDisplay.textContent =` Та: ${playerScore} | Компьютер: ${computerScore}`;
+
+      
+      if (playerScore === 3) {
+        resultText.textContent = " ТА ЯЛЛАА! ";
+        disableButtons();
+      } else if (computerScore === 3) {
+        resultText.textContent = "КОМПЬЮТЕР ЯЛЛАА! ";
+        disableButtons();
+      }
+    }
+
+    function resetGame() {
+      playerScore = 0;
+      computerScore = 0;
+      movePosition = 0;
+      playerHand.style.left = "0px";
+      playerHand.textContent = "❓";
+      computerHand.textContent = "❓";
+      smallPlayerChoice.textContent = "";
+      scoreDisplay.textContent =` Та: 0 | Компьютер: 0`;
+      resultText.textContent = "Сонголтоо хийгээрэй!";
+      enableButtons();
+    }
+
+    function disableButtons() {
+      document.querySelectorAll(".choices button").forEach(btn => btn.disabled = true);
+    }
+
+    function enableButtons() {
+      document.querySelectorAll(".choices button").forEach(btn => btn.disabled = false);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shagai Race</title>
+    <style>
+        body {
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .FourAnimal {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 40px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffcb74;
+            border: 1px solid #9f6917;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f1a940;
+        }
+
+        .raceTrack {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 50px;
+            padding-left: 50px;
+            position: relative;
+            height: 400px;
+        }
+
+        .finishLine {
+            padding-right: 300px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        
+
+        #winnerMessage {
+            text-align: center;
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="FourAnimal">
+        <div id="Shagai_one">🐎</div>
+        <div id="Shagai_two">🐐</div>
+        <div id="Shagai_three">🐑</div>
+        <div id="Shagai_four">🐪</div>
+    </div>
+
+    <div class="button">
+        <button id="raceButton" onclick="myFunction()">Tap me!</button>
+        <button onclick="resetRace()">Play Again</button>
+    </div>
+
+    <div class="raceTrack">
+        <div id="raceHorse1" class="raceHorse1">
+            <img src="race1-removebg-preview.png" width="120" height="120">
+        </div>
+        <div id="raceHorse2" class="raceHorse2">
+            <img src="race1-removebg-preview.png" width="120" height="120">
+        </div>
+        <div class="finishLine">
+            <img src="baria.jpg" width="40" height="400">
+        </div>
+    </div>
+
+    <div id="winnerMessage"></div>
+
+    <script>
+        const shagaiFaces = ["🐎", "🐐", "🐑", "🐪"];
+
+        const shagaiOne = document.getElementById('Shagai_one');
+        const shagaiTwo = document.getElementById('Shagai_two');
+        const shagaiThree = document.getElementById('Shagai_three');
+        const shagaiFour = document.getElementById('Shagai_four');
+
+        const horseOne = document.getElementById('raceHorse1');
+        const horseTwo = document.getElementById('raceHorse2');
+
+        const raceButton = document.getElementById('raceButton');
+        const winnerMessage = document.getElementById('winnerMessage');
+
+        let horseOnePosition = 0;
+        let horseTwoPosition = 0;
+        let player = 1
+
+        //morinii zam
+        const finishLine = 1000; 
+
+        function myFunction() {
+            const randomOne = Math.floor(Math.random() * 4);
+            const randomTwo = Math.floor(Math.random() * 4);
+            const randomThree = Math.floor(Math.random() * 4);
+            const randomFour = Math.floor(Math.random() * 4);
+
+            shagaiOne.innerHTML = shagaiFaces[randomOne];
+            shagaiTwo.innerHTML = shagaiFaces[randomTwo];
+            shagaiThree.innerHTML = shagaiFaces[randomThree];
+            shagaiFour.innerHTML = shagaiFaces[randomFour];
+
+            let moveStepsHorse1 = 0;
+            let moveStepsHorse2 = 0;
+
+            [randomOne, randomTwo, randomThree, randomFour].forEach(value => {
+                if (value === 0) {moveStepsHorse1++};
+                if (value === 1) moveStepsHorse2++;
+            });
+
+            horseOnePosition += moveStepsHorse1 * 50;
+            horseTwoPosition += moveStepsHorse2 * 50;
+
+            horseOne.style.transform = `translateX(${horseOnePosition}px)`;
+            horseTwo.style.transform = `translateX(${horseTwoPosition}px)`;
+
+
+            // yalaltin message 
+            if (horseOnePosition >= finishLine) {
+                winnerMessage.textContent = "Horse 1 Won!";
+                raceButton.disabled = true;
+            } else if (horseTwoPosition >= finishLine) {
+                winnerMessage.textContent = "Horse 2 Won!";
+                raceButton.disabled = true;
+            }
+        }
+
+        function resetRace() {
+            horseOnePosition = 0;
+            horseTwoPosition = 0;
+            horseOne.style.transform = `translateX(0px)`;
+            horseTwo.style.transform = `translateX(0px)`;
+            winnerMessage.textContent = "";
+            raceButton.disabled = false;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>Морь уралдаан</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      text-align: center;
+    }
+
+    .shagai-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .shagai {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .board {
+      width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 5px solid black;
+      position: relative;
+    }
+
+    .player {
+      position: relative;
+      margin: 30px 0;
+    }
+
+    .track {
+      height: 60px;
+      border-top: 3px dashed #000;
+      position: relative;
+    }
+
+    .horse {
+      width: 50px;
+      position: absolute;
+      top: -30px;
+      left: 0;
+      transition: left 0.5s ease;
+    }
+
+    .finish-line {
+      position: absolute;
+      left: 600px;
+      top: -40px;
+      width: 10px;
+      height: 100px;
+      background: repeating-linear-gradient(
+        45deg,
+        black,
+        black 5px,
+        white 5px,
+        white 10px
+      );
+    }
+
+    .step-marks {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 600px;
+      pointer-events: none;
+    }
+
+    .step-marks div {
+      width: 1px;
+      height: 20px;
+      background: #999;
+    }
+
+    #winner {
+      font-size: 24px;
+      font-weight: bold;
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Шагай орхих тоглоом</h2>
+
+  <!-- Shagai zurguud -->
+  <div class="shagai-row">
+    <img id="s1" class="shagai" src="images/морь.png" alt="шагай">
+    <img id="s2" class="shagai" src="images/хонь.png" alt="шагай">
+    <img id="s3" class="shagai" src="images/тэмээ.png" alt="шагай">
+    <img id="s4" class="shagai" src="images/ямаа.png" alt="шагай">
+  </div>
+
+  <button onclick="throwShagai()">Шагай орхих</button>
+  <button onclick="resetGame()">Дахин эхлүүлэх</button>
+
+  <div id="winner"></div>
+
+  <!--  Mori uraldaan -->
+  <div class="board">
+    <div>ТОГЛОГЧ 1</div>
+    <div class="player">
+      <img src="images/mori.jpg" class="horse" id="horse1">
+      <div class="track">
+        <div class="finish-line"></div>
+        <div class="step-marks">
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>ТОГЛОГЧ 2</div>
+    <div class="player">
+      <img src="images/mori.jpg" class="horse" id="horse2">
+      <div class="track">
+        <div class="finish-line"></div>
+        <div class="step-marks">
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const shagaiImages = [
+      'images/морь.png',
+      'images/хонь.png',
+      'images/тэмээ.png',
+      'images/ямаа.png'
+    ];
+
+    const defaultShagai = ['морь.png', 'хонь.png', 'тэмээ.png', 'ямаа.png'];
+    let currentPlayer = 1;
+    let horse1Pos = 0;
+    let horse2Pos = 0;
+    const finishLine = 550; // 600px - 50px morinii urgun
+
+    function throwShagai() {
+      if (horse1Pos >= finishLine || horse2Pos >= finishLine) return;
+
+      let countMori = 0;
+
+      for (let i = 1; i <= 4; i++) {
+        const rand = Math.floor(Math.random() * 4);
+        document.getElementById(`s${i}`).src = shagaiImages[rand];
+        if (rand === 0) countMori++;
+      }
+
+      const move = countMori * 66.6;
+
+      if (currentPlayer === 1) {
+        horse1Pos += move;
+        if (horse1Pos > finishLine) horse1Pos = finishLine;
+        document.getElementById("horse1").style.left = horse1Pos + "px";
+        currentPlayer = 2;
+      } else {
+        horse2Pos += move;
+        if (horse2Pos > finishLine) horse2Pos = finishLine;
+        document.getElementById("horse2").style.left = horse2Pos + "px";
+        currentPlayer = 1;
+      }
+
+      checkWinner();
+    }
+
+    function checkWinner() {
+      const winnerDiv = document.getElementById("winner");
+      if (horse1Pos >= finishLine) {
+        winnerDiv.textContent = "🏁 Тоглогч 1 ялав!";
+      } else if (horse2Pos >= finishLine) {
+        winnerDiv.textContent = "🏁 Тоглогч 2 ялав!";
+      }
+    }
+
+    function resetGame() {
+      horse1Pos = 0;
+      horse2Pos = 0;
+      currentPlayer = 1;
+
+      document.getElementById("horse1").style.left = "0px";
+      document.getElementById("horse2").style.left = "0px";
+
+      // anhnii shagai haruulah
+      document.getElementById("s1").src = "images/морь.png";
+      document.getElementById("s2").src = "images/хонь.png";
+      document.getElementById("s3").src = "images/тэмээ.png";
+      document.getElementById("s4").src = "images/ямаа.png";
+
+      document.getElementById("winner").textContent = "";
+    }
+  </script>
+
+</body>
+</html>
