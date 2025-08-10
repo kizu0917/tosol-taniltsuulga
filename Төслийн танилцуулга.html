@@ -722,14 +722,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 40vh;
-            padding: 10px;
+            min-height: 40vh;
+            padding: 20px;
             gap: 30px;
             flex-wrap: wrap;
+            background-color: var(--extra-light);
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
         }
 
         .about-img img {
-            width: 350px;
+            width: 100%;
             height: auto;
             border-radius: 10px;
             object-fit: cover;
@@ -738,12 +745,15 @@
        
 
         .about-text {
-            max-width: 300px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
         }
 
         .about-text h2 {
             font-size: 24px;
-            margin-bottom: 4px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
         }
 
         .about-text h2 span {
@@ -757,10 +767,136 @@
         }
 
         .about-text p {
-            font-size: 12px;
+            font-size: 16px;
             line-height: 1.6;
-            color: var(--second-color);
+            color: var(--text-light);
         }
+
+        /* Mobile responsiveness improvements */
+        @media (max-width: 768px) {
+            .about {
+                flex-direction: column;
+                padding: 15px;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .about-img {
+                min-width: 250px;
+                max-width: 100%;
+            }
+
+            .about-text {
+                min-width: 250px;
+                max-width: 100%;
+            }
+
+            .about-text h2 {
+                font-size: 20px;
+            }
+
+            .about-text p {
+                font-size: 14px;
+            }
+
+            .header__content h1 {
+                font-size: 2.5rem;
+                line-height: 3rem;
+            }
+
+            .section__header {
+                font-size: 2rem;
+            }
+
+            .service__grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .service__card {
+                padding: 15px;
+            }
+
+            .service__card h4 {
+                font-size: 1rem;
+            }
+
+            .portfolio__header {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .portfolio__content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .portfolio__image__content {
+                position: static;
+                transform: none;
+                margin-bottom: 15px;
+            }
+
+            .portfolio__image__content div {
+                padding: 10px;
+            }
+
+            .portfolio__image__content h4 {
+                font-size: 1.5rem;
+            }
+
+            .portfolio__image__content p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about {
+                padding: 10px;
+                gap: 15px;
+            }
+
+            .about-img {
+                min-width: 200px;
+            }
+
+            .about-text h2 {
+                font-size: 18px;
+            }
+
+            .about-text p {
+                font-size: 13px;
+            }
+
+            .header__content h1 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .section__header {
+                font-size: 1.5rem;
+            }
+
+            .service__card {
+                padding: 10px;
+            }
+
+            .service__card h4 {
+                font-size: 0.9rem;
+            }
+
+            .portfolio__image__content div {
+                padding: 8px;
+            }
+
+            .portfolio__image__content h4 {
+                font-size: 1.2rem;
+            }
+
+                         .portfolio__image__content p {
+                 font-size: 0.7rem;
+             }
+         }
 
         @media (width > 540px) {
             .service__grid {
@@ -970,36 +1106,28 @@
         </div>
     </section>
    <section class="about" id="about">
+        <div class="about-text">
+            <h2>Тоо судалгаа: Нийт</h2>
+            <p>
+                Монгол Улсад албан ёсоор бүртгэлтэй хөгжлийн бэрхшээлтэй иргэдийн тоо: 110,000 гаруй.
+            </p>
+        </div>
+        <div class="about-img">
+            <img src="Төсөл/chart (1).png" alt="Нийт тоо судалгаа">
+        </div>
+    </section>
     
+    <section class="about" id="about-details">
         <div class="about-img">
-          <img src="Төсөл/chart (1).png">
+            <img src="Төсөл/chart.png" alt="Дохионы хэл хэрэглэгчдийн тоо">
         </div>
         <div class="about-text">
-            <h2> Тоо судалгаа: Нийт</h2>
-          
+            <h2>Зөвхөн яриа болон сонсголын бэрхшээлтэй</h2>
             <p>
-           Монгол Улсад албан ёсоор бүртгэлтэй хөгжлийн бэрхшээлтэй иргэдийн тоо: 110,000 гаруй.
+                Дохионы хэл хэрэглэгчдийн тоо:<br>
+                Монгол дохионы хэлийг тогтмол хэрэглэгчид ~8,000 хүн<br>
+                Гэхдээ өдөр тутмын орчинд ойлгодог, хэрэглэж чаддаг хүн 0.5%-аас ч бага
             </p>
-              
-
-
-         
-        </div>
-        <div class="about-img">
-            <img src="Төсөл/chart.png">
-        </div>
-        <div class="about-text">
-            <h2> Зөвхөн яриа болон сонсголын бэрхшээлтэй</h2>
-          
-            <p>
-            Дохионы хэл хэрэглэгчдийн тоо:
-Монгол дохионы хэлийг тогтмол хэрэглэгчид ~8,000 хүн
-Гэхдээ өдөр тутмын орчинд ойлгодог, хэрэглэж чаддаг хүн 0.5%-аас ч бага
-            </p>
-              
-
-
-            
         </div>
     </section>
     <section id="impact" style="padding: 3rem 1rem; background-color: #f0f9f7; font-family: sans-serif;">
